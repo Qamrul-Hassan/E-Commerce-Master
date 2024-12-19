@@ -61,7 +61,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Search Bar */}
-        <div className="md:hidden flex items-center space-x-2">
+        <div className="md:hidden flex items-center space-x-2 relative">
           <input
             type="text"
             placeholder="Search..."
@@ -69,7 +69,7 @@ const Navbar = () => {
             onChange={handleSearchChange}
             className="text-sm pl-10 pr-4 py-2 border rounded-full outline-none bg-[#F0F0F0] text-[#0D0E43]"
           />
-          <button className="bg-[#FB2E86] p-2 rounded-full">
+          <button className="absolute right-1 top-1/2 transform -translate-y-1/2 bg-[#FB2E86] p-2 rounded-full">
             <FaSearch className="text-white text-lg" />
           </button>
         </div>
@@ -151,7 +151,7 @@ const Navbar = () => {
               onChange={handleSearchChange}
               className="text-sm pl-10 pr-4 py-2 border rounded-full outline-none bg-[#F0F0F0] text-[#0D0E43]"
             />
-            <button className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-[#FB2E86] p-2 rounded-full">
+            <button className="absolute top-1/2 right-1 transform -translate-y-1/2 bg-[#FB2E86] p-2 rounded-full">
               <FaSearch className="text-white text-lg" />
             </button>
           </li>
@@ -185,7 +185,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed top-0 left-0 w-[75%] h-[70%] rounded-2xl bg-[#7E33E0] shadow-lg z-50 py-8 px-6 mobile-menu transform transition-transform duration-300 ease-in-out  ${
+        className={`fixed top-0 left-0 w-[75%] h-[70%] rounded-2xl bg-[#7E33E0] shadow-lg z-50 py-8 px-6 mobile-menu transform transition-transform duration-500 ease-in-out  ${
           isMenuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
