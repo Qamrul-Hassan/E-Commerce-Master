@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { DataContext } from "../Components/DataContext";
 import PageLayout from "../Components/PageLayout";
+import { FaTrashAlt } from "react-icons/fa"; // Import the trash icon
 
 const CartPage = () => {
   const { cart, removeFromCart, clearCart, updateCart } = useContext(DataContext); // Access context functions
@@ -121,7 +122,7 @@ const CartPage = () => {
                           onClick={() => handleRemoveFromCart(item.id)}
                           className="text-red-500 font-medium hover:text-red-700"
                         >
-                          Remove
+                          <FaTrashAlt /> {/* Replace "Remove" with a trash icon */}
                         </button>
                       </td>
                     </tr>
