@@ -177,11 +177,16 @@ const CartPage = () => {
               {/* Shipping Calculator */}
               <div className="mt-6">
                 <h4 className="text-gray-800 font-semibold mb-2">
-                  Calculate Shipping
+                  Address
                 </h4>
                 <input
                   type="text"
-                  placeholder="Country"
+                  placeholder="Full name"
+                  className="w-full mb-3 p-2 border rounded-md"
+                />
+                  <input
+                  type="text"
+                  placeholder="Address"
                   className="w-full mb-3 p-2 border rounded-md"
                 />
                 <input
@@ -194,8 +199,13 @@ const CartPage = () => {
                   placeholder="Postal Code"
                   className="w-full mb-3 p-2 border rounded-md"
                 />
+                <input
+                  type="text"
+                  placeholder="Country"
+                  className="w-full mb-3 p-2 border rounded-md"
+                />
                 <button className="w-full bg-pink-500 text-white py-2 rounded-md hover:bg-pink-600">
-                  Calculate Shipping
+                  Continue Shipping
                 </button>
               </div>
             </div>
