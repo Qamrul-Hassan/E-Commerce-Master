@@ -1,14 +1,25 @@
 import React, { useContext, useState, useEffect } from "react";
 import { DataContext } from "../Components/DataContext";
 import PageLayout from "../Components/PageLayout";
-import { FaTrashAlt } from "react-icons/fa"; // Import icons
+import { FaTrashAlt } from "react-icons/fa";
 import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io";
+
 const CartPage = () => {
-  const { cart, removeFromCart, clearCart, updateCart } = useContext(DataContext); // Access context functions
-  const [updatedCart, setUpdatedCart] = useState([...cart]); // Maintain a local state for cart changes
+  const { cart, removeFromCart, clearCart, updateCart } = useContext(DataContext);
+  const [updatedCart, setUpdatedCart] = useState(
+    JSON.parse(localStorage.getItem("cart")) || cart
+  );
 
   useEffect(() => {
-    setUpdatedCart([...cart]);
+    // Update localStorage whenever cart changes
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  }, [updatedCart]);
+
+  useEffect(() => {
+    // Sync local state with the context cart
+    if (cart.length > 0) {
+      setUpdatedCart(cart);
+    }
   }, [cart]);
 
   const handleQuantityChange = (id, action) => {
@@ -22,7 +33,7 @@ const CartPage = () => {
                   ? item.quantity + 1
                   : item.quantity > 1
                   ? item.quantity - 1
-                  : 1, // Prevent negative quantities
+                  : 1,
             }
           : item
       )
@@ -42,12 +53,14 @@ const CartPage = () => {
 
   const handleRemoveFromCart = (id) => {
     removeFromCart(id);
-    setUpdatedCart(updatedCart.filter((item) => item.id !== id));
+    const filteredCart = updatedCart.filter((item) => item.id !== id);
+    setUpdatedCart(filteredCart);
   };
 
   const handleClearCart = () => {
     clearCart();
     setUpdatedCart([]);
+    localStorage.removeItem("cart"); // Clear localStorage
   };
 
   return (
