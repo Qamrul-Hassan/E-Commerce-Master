@@ -1,13 +1,12 @@
 import React, { useContext, useState, useEffect } from "react";
 import { DataContext } from "../Components/DataContext";
 import PageLayout from "../Components/PageLayout";
-import { FaTrashAlt } from "react-icons/fa"; // Import the trash icon
-
+import { FaTrashAlt } from "react-icons/fa"; // Import icons
+import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io"
 const CartPage = () => {
   const { cart, removeFromCart, clearCart, updateCart } = useContext(DataContext); // Access context functions
   const [updatedCart, setUpdatedCart] = useState([...cart]); // Maintain a local state for cart changes
 
-  // Update local state whenever the global cart changes
   useEffect(() => {
     setUpdatedCart([...cart]);
   }, [cart]);
@@ -37,19 +36,18 @@ const CartPage = () => {
   };
 
   const handleUpdateCart = () => {
-    updateCart(updatedCart); // Update the global cart in context
+    updateCart(updatedCart);
     console.log("Cart updated:", updatedCart);
   };
 
   const handleRemoveFromCart = (id) => {
-    removeFromCart(id); // Remove from context
-    setUpdatedCart(updatedCart.filter((item) => item.id !== id)); // Update local state
+    removeFromCart(id);
+    setUpdatedCart(updatedCart.filter((item) => item.id !== id));
   };
 
   const handleClearCart = () => {
-    console.log("Clearing cart");
-    clearCart(); // Clear the cart in context
-    setUpdatedCart([]); // Clear the local cart state
+    clearCart();
+    setUpdatedCart([]);
   };
 
   return (
@@ -90,7 +88,7 @@ const CartPage = () => {
                           </p>
                         </div>
                       </td>
-                      <td className="py-4 text-gray-700">
+                      <td className="py-4 text-gray-700 text-sm md:text-base">
                         ${item.price.toFixed(2)}
                       </td>
                       <td className="py-4 flex items-center">
@@ -103,21 +101,25 @@ const CartPage = () => {
                           />
                           <div className="flex flex-col">
                             <button
-                              onClick={() => handleQuantityChange(item.id, "increase")}
-                              className="px-2 py-0 bg-gray-200 hover:bg-gray-300"
+                              onClick={() =>
+                                handleQuantityChange(item.id, "increase")
+                              }
+                              className="px-0 py-0 bg-gray-200 hover:bg-gray-300 rounded-tr-md"
                             >
-                              &uarr;
+                              <IoMdArrowDropup />
                             </button>
                             <button
-                              onClick={() => handleQuantityChange(item.id, "decrease")}
-                              className="px-2 py-1 bg-gray-200 hover:bg-gray-300"
+                              onClick={() =>
+                                handleQuantityChange(item.id, "decrease")
+                              }
+                              className="px-0 py-0 bg-gray-200 hover:bg-gray-300 rounded-br-md"
                             >
-                              &darr;
+                              <IoMdArrowDropdown />
                             </button>
                           </div>
                         </div>
                       </td>
-                      <td className="py-4 font-semibold text-gray-800">
+                      <td className="py-2 font-normal text-gray-800 text-sm md:text-base">
                         ${(item.price * item.quantity).toFixed(2)}
                       </td>
                       <td className="py-4">
