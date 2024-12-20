@@ -80,6 +80,11 @@ const DataContextProvider = ({ children }) => {
     setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
   };
 
+  // Clear the entire cart
+  const clearCart = () => {
+    setCart([]); // Clears the cart
+  };
+
   // Toggle product in wishlist
   const toggleWishlist = (productId) => {
     setWishlist((prevWishlist) =>
@@ -96,7 +101,7 @@ const DataContextProvider = ({ children }) => {
 
   // Clear the entire wishlist
   const clearWishlist = () => {
-    setWishlist([]);
+    setWishlist([]); // Clears the wishlist
   };
 
   return (
@@ -109,9 +114,10 @@ const DataContextProvider = ({ children }) => {
         wishlist,
         addToCart,
         removeFromCart,
-        toggleWishlist, // Provide the toggleWishlist method
-        removeFromWishlist, // Provide the removeFromWishlist method
-        clearWishlist, // Provide the clearWishlist method
+        clearCart, // Provide the clearCart function
+        toggleWishlist,
+        removeFromWishlist,
+        clearWishlist, // Provide the clearWishlist function
         loadingProducts,
         loadingBlogs,
         loadingOffers,
