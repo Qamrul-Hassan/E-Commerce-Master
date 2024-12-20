@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { DataContext } from "../Components/DataContext";
 import PageLayout from "../Components/PageLayout";
 import { FaTrashAlt } from "react-icons/fa"; // Import icons
-import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io"
+import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io";
 const CartPage = () => {
   const { cart, removeFromCart, clearCart, updateCart } = useContext(DataContext); // Access context functions
   const [updatedCart, setUpdatedCart] = useState([...cart]); // Maintain a local state for cart changes
