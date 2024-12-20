@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import PageLayout from "../Components/PageLayout";
-import { FaCalendarAlt, FaPenNib } from "react-icons/fa";
+import { FaCalendarAlt, FaPenNib, FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { DataContext } from "../Components/DataContext";
 import BlogImage1 from "../assets/Image/Blog-1.png";
 import BlogImage2 from "../assets/Image/Blog-2.png";
@@ -162,7 +162,10 @@ const BlogPage = () => {
             <div>
               <h4 className="font-semibold text-gray-800 mb-4">Follow Us</h4>
               <div className="flex space-x-4">
-                {/* Icons */}
+                <FaFacebook className="text-blue-600 text-xl hover:text-blue-800 transition-colors cursor-pointer" />
+                <FaTwitter className="text-blue-400 text-xl hover:text-blue-600 transition-colors cursor-pointer" />
+                <FaInstagram className="text-pink-500 text-xl hover:text-pink-700 transition-colors cursor-pointer" />
+                <FaLinkedin className="text-blue-700 text-xl hover:text-blue-900 transition-colors cursor-pointer" />
               </div>
             </div>
 
