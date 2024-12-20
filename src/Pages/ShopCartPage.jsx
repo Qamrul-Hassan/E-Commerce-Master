@@ -47,6 +47,7 @@ const CartPage = () => {
   };
 
   const handleClearCart = () => {
+    console.log("Clearing cart");
     clearCart(); // Clear the cart in context
     setUpdatedCart([]); // Clear the local cart state
   };
@@ -144,11 +145,11 @@ const CartPage = () => {
                 <button
                   onClick={handleClearCart}
                   className={`py-2 px-6 rounded-md ${
-                    cart.length === 0
+                    updatedCart.length === 0
                       ? "bg-gray-400 text-gray-200 cursor-not-allowed"
                       : "bg-red-500 text-white hover:bg-red-600"
                   }`}
-                  disabled={cart.length === 0}
+                  disabled={updatedCart.length === 0}
                 >
                   Clear Cart
                 </button>
