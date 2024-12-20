@@ -1,13 +1,43 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { DataContext } from "../Components/DataContext"; // Import DataContext
 import PageLayout from "../Components/PageLayout";
 import { FaHeart, FaShoppingCart } from "react-icons/fa"; // Import icons
 
 const Wishlist = () => {
   const { products, wishlist, removeFromWishlist, addToCart, clearWishlist } = useContext(DataContext); // Get wishlist and methods from DataContext
+  
+  // Initialize wishlist state from localStorage or context
+  const [updatedWishlist, setUpdatedWishlist] = useState(
+    JSON.parse(localStorage.getItem("wishlist")) || wishlist
+  );
+
+  useEffect(() => {
+    // Update localStorage whenever the wishlist changes
+    localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
+  }, [updatedWishlist]);
+
+  useEffect(() => {
+    // Sync local state with the context wishlist
+    if (wishlist.length > 0) {
+      setUpdatedWishlist(wishlist);
+    }
+  }, [wishlist]);
 
   // Filter the products that are in the wishlist
-  const wishlistProducts = products.filter((product) => wishlist.includes(product.id));
+  const wishlistProducts = products.filter((product) =>
+    updatedWishlist.includes(product.id)
+  );
+
+  const handleRemoveFromWishlist = (id) => {
+    const filteredWishlist = updatedWishlist.filter((itemId) => itemId !== id);
+    setUpdatedWishlist(filteredWishlist);
+  };
+
+  const handleClearWishlist = () => {
+    clearWishlist();
+    setUpdatedWishlist([]); // Clear the local state
+    localStorage.removeItem("wishlist"); // Clear localStorage
+  };
 
   return (
     <PageLayout pageTitle="Wishlist" subTitle="Home, Pages, Wishlist">
@@ -20,7 +50,7 @@ const Wishlist = () => {
           <>
             {/* Clear Wishlist Button */}
             <button
-              onClick={clearWishlist} // Activates the clearWishlist function
+              onClick={handleClearWishlist} // Activates the handleClearWishlist function
               className="mb-6 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
             >
               Clear Wishlist
@@ -48,7 +78,7 @@ const Wishlist = () => {
                       <div className="flex items-center space-x-4">
                         {/* Love Icon - Removes from Wishlist */}
                         <button
-                          onClick={() => removeFromWishlist(product.id)} // Activates removeFromWishlist function
+                          onClick={() => handleRemoveFromWishlist(product.id)} // Removes product from wishlist
                           className="text-red-500 hover:text-red-600"
                         >
                           <FaHeart size={20} />
