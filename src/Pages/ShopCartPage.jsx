@@ -31,10 +31,9 @@ const CartPage = () => {
   };
 
   const calculateTotal = () => {
-    return updatedCart.reduce(
-      (total, item) => total + item.price * item.quantity,
-      0
-    ).toFixed(2);
+    return updatedCart
+      .reduce((total, item) => total + item.price * item.quantity, 0)
+      .toFixed(2);
   };
 
   const handleUpdateCart = () => {
@@ -44,7 +43,7 @@ const CartPage = () => {
 
   const handleRemoveFromCart = (id) => {
     removeFromCart(id); // Remove from context
-    setUpdatedCart(updatedCart.filter(item => item.id !== id)); // Update local state
+    setUpdatedCart(updatedCart.filter((item) => item.id !== id)); // Update local state
   };
 
   const handleClearCart = () => {
@@ -95,24 +94,28 @@ const CartPage = () => {
                         ${item.price.toFixed(2)}
                       </td>
                       <td className="py-4 flex items-center">
-                        <button
-                          onClick={() => handleQuantityChange(item.id, "decrease")}
-                          className="px-2 py-1 bg-gray-200 rounded-l-md hover:bg-gray-300"
-                        >
-                          &lt;
-                        </button>
-                        <input
-                          type="number"
-                          value={item.quantity}
-                          readOnly
-                          className="w-12 text-center border-y border-gray-300"
-                        />
-                        <button
-                          onClick={() => handleQuantityChange(item.id, "increase")}
-                          className="px-2 py-1 bg-gray-200 rounded-r-md hover:bg-gray-300"
-                        >
-                          &gt;
-                        </button>
+                        <div className="relative flex items-center">
+                          <input
+                            type="number"
+                            value={item.quantity}
+                            readOnly
+                            className="w-12 text-center border border-gray-300 rounded-l-md"
+                          />
+                          <div className="flex flex-col">
+                            <button
+                              onClick={() => handleQuantityChange(item.id, "increase")}
+                              className="px-2 py-0 bg-gray-200 hover:bg-gray-300"
+                            >
+                              &uarr;
+                            </button>
+                            <button
+                              onClick={() => handleQuantityChange(item.id, "decrease")}
+                              className="px-2 py-1 bg-gray-200 hover:bg-gray-300"
+                            >
+                              &darr;
+                            </button>
+                          </div>
+                        </div>
                       </td>
                       <td className="py-4 font-semibold text-gray-800">
                         ${(item.price * item.quantity).toFixed(2)}
@@ -122,7 +125,7 @@ const CartPage = () => {
                           onClick={() => handleRemoveFromCart(item.id)}
                           className="text-red-500 font-medium hover:text-red-700"
                         >
-                          <FaTrashAlt /> {/* Replace "Remove" with a trash icon */}
+                          <FaTrashAlt />
                         </button>
                       </td>
                     </tr>
@@ -178,9 +181,7 @@ const CartPage = () => {
 
               {/* Shipping Calculator */}
               <div className="mt-6">
-                <h4 className="text-gray-800 font-semibold mb-2">
-                  Address
-                </h4>
+                <h4 className="text-gray-800 font-semibold mb-2">Address</h4>
                 <input
                   type="text"
                   placeholder="Full name"
