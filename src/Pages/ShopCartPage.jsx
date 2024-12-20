@@ -59,7 +59,7 @@ const CartPage = () => {
             Your cart is empty.
           </div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-10">
             {/* Cart Items Section */}
             <div className="lg:col-span-2">
               <table className="w-full border-collapse text-left">
@@ -156,7 +156,7 @@ const CartPage = () => {
             </div>
 
             {/* Cart Totals Section */}
-            <div className="bg-gray-100 p-6 rounded-lg shadow-md">
+            <div className="lg:col-span-2 bg-gray-100 p-6 rounded-lg shadow-md">
               <h3 className="text-lg font-bold text-gray-800 mb-4">Cart Totals</h3>
               <div className="border-b pb-4 text-gray-700">
                 <p className="flex justify-between">
@@ -184,7 +184,7 @@ const CartPage = () => {
                   placeholder="Full name"
                   className="w-full mb-3 p-2 border rounded-md"
                 />
-                  <input
+                <input
                   type="text"
                   placeholder="Address"
                   className="w-full mb-3 p-2 border rounded-md"
