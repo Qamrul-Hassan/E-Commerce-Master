@@ -59,40 +59,43 @@ const ProductDetails = () => {
 
   return (
     <PageLayout pageTitle="Product Details">
-      <div className="p-8">
+      <div className="p-4 md:p-8">
         <div className="max-w-6xl mx-auto bg-white p-6 rounded-lg shadow-md">
-          <div className="flex gap-6">
-            <div className="w-1/4 flex flex-col gap-4">
+          <div className="flex flex-col md:flex-row gap-6">
+            {/* Thumbnails */}
+            <div className="w-full md:w-1/4 flex flex-row md:flex-col gap-4">
               <img
                 src={product.image}
                 alt={product.title}
-                className="w-full h-24 object-contain cursor-pointer"
+                className="w-1/4 md:w-full h-24 object-contain cursor-pointer"
               />
               <img
                 src={product.image}
                 alt={product.title}
-                className="w-full h-24 object-contain cursor-pointer"
+                className="w-1/4 md:w-full h-24 object-contain cursor-pointer"
               />
               <img
                 src={product.image}
                 alt={product.title}
-                className="w-full h-24 object-contain cursor-pointer"
+                className="w-1/4 md:w-full h-24 object-contain cursor-pointer"
               />
             </div>
 
-            <div className="w-1/2">
+            {/* Main Image */}
+            <div className="w-full md:w-1/2">
               <img
                 src={product.image}
                 alt={product.title}
                 className={`w-full h-auto object-cover transition-transform duration-300 ${
                   isZoomed ? "transform scale-125" : ""
-                }`} // Zoom effect on image
+                }`}
               />
             </div>
 
-            <div className="w-1/4 flex flex-col justify-between">
-              <h1 className="text-2xl font-bold text-gray-800">{product.title}</h1>
-              <div className="flex items-center justify-between mt-4">
+            {/* Product Info */}
+            <div className="w-full md:w-1/4 flex flex-col justify-between">
+              <h1 className="text-xl md:text-2xl font-bold text-gray-800">{product.title}</h1>
+              <div className="flex flex-wrap items-center justify-between mt-4">
                 <span className="text-lg font-semibold text-blue-500">
                   ${product.price}
                 </span>
@@ -127,8 +130,8 @@ const ProductDetails = () => {
                 <button
                   className={`p-2 rounded-full cursor-pointer border-2 ${
                     isLiked
-                      ? "bg-red-600 border-red-600 text-white" // After clicking: Red background, white heart
-                      : "border-red-600 text-red-600" // Before clicking: Red border, red heart
+                      ? "bg-red-600 border-red-600 text-white"
+                      : "border-red-600 text-red-600"
                   }`}
                   onClick={() => toggleWishlist(product.id)} // Toggle wishlist state
                 >
@@ -217,4 +220,4 @@ const ProductDetails = () => {
   );
 };
 
-export default ProductDetails
+export default ProductDetails;
