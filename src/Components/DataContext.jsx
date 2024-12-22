@@ -6,13 +6,30 @@ const DataContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [blogs, setBlogs] = useState([]);
   const [offers, setOffers] = useState([]);
-  const [cart, setCart] = useState([]);
-  const [wishlist, setWishlist] = useState([]); // State for managing wishlist
+  const [cart, setCart] = useState(() => {
+    // Load cart from localStorage on initialization
+    const savedCart = localStorage.getItem("cart");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+  const [wishlist, setWishlist] = useState(() => {
+    // Load wishlist from localStorage on initialization
+    const savedWishlist = localStorage.getItem("wishlist");
+    return savedWishlist ? JSON.parse(savedWishlist) : [];
+  });
+
   const [loadingProducts, setLoadingProducts] = useState(true);
   const [loadingBlogs, setLoadingBlogs] = useState(true);
   const [loadingOffers, setLoadingOffers] = useState(true);
 
-  // Fetch products data
+  // Save cart and wishlist to localStorage whenever they are updated
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  useEffect(() => {
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+  }, [wishlist]);
+
   const fetchProducts = async () => {
     setLoadingProducts(true);
     try {
@@ -26,7 +43,6 @@ const DataContextProvider = ({ children }) => {
     }
   };
 
-  // Fetch blogs data
   const fetchBlogs = async () => {
     setLoadingBlogs(true);
     try {
@@ -40,7 +56,6 @@ const DataContextProvider = ({ children }) => {
     }
   };
 
-  // Fetch offers data
   const fetchOffers = async () => {
     setLoadingOffers(true);
     try {
@@ -60,7 +75,6 @@ const DataContextProvider = ({ children }) => {
     fetchOffers();
   }, []);
 
-  // Add product to cart
   const addToCart = (product) => {
     setCart((prevCart) => {
       const existingProductIndex = prevCart.findIndex((item) => item.id === product.id);
@@ -75,33 +89,28 @@ const DataContextProvider = ({ children }) => {
     });
   };
 
-  // Remove product from cart
   const removeFromCart = (productId) => {
     setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
   };
 
-  // Clear the entire cart
   const clearCart = () => {
-    setCart([]); // Clears the cart
+    setCart([]);
   };
 
-  // Toggle product in wishlist
   const toggleWishlist = (productId) => {
     setWishlist((prevWishlist) =>
       prevWishlist.includes(productId)
-        ? prevWishlist.filter((id) => id !== productId) // Remove from wishlist
-        : [...prevWishlist, productId] // Add to wishlist
+        ? prevWishlist.filter((id) => id !== productId)
+        : [...prevWishlist, productId]
     );
   };
 
-  // Remove product from wishlist
   const removeFromWishlist = (productId) => {
     setWishlist((prevWishlist) => prevWishlist.filter((id) => id !== productId));
   };
 
-  // Clear the entire wishlist
   const clearWishlist = () => {
-    setWishlist([]); // Clears the wishlist
+    setWishlist([]);
   };
 
   return (
@@ -114,10 +123,10 @@ const DataContextProvider = ({ children }) => {
         wishlist,
         addToCart,
         removeFromCart,
-        clearCart, // Provide the clearCart function
+        clearCart,
         toggleWishlist,
         removeFromWishlist,
-        clearWishlist, // Provide the clearWishlist function
+        clearWishlist,
         loadingProducts,
         loadingBlogs,
         loadingOffers,
