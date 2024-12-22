@@ -87,7 +87,7 @@ const TopBar = () => {
 
       {/* Mobile Slide-in Menu */}
       <div
-        className={`fixed top-0 left-0 h-screen bg-purple-600 text-white p-6 sm:hidden z-20 transform transition-transform duration-500 ease-in-out ${
+        className={`fixed top-0 left-0 w-[35%] h-[45%] bg-purple-600 text-white p-6 sm:hidden z-20 transform transition-transform duration-700 ease-in-out ${
           isMenuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
