@@ -1,17 +1,17 @@
 import { FaEnvelope, FaPhoneAlt, FaHeart, FaShoppingCart, FaBars, FaTimes } from "react-icons/fa";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { DataContext } from "../Components/DataContext";
 
 const TopBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false); // State for mobile menu
 
-  // Fetch cart and wishlist items from Redux state with default empty array to prevent errors
-  const cartItems = useSelector((state) => state.cart?.items || []); // Safe access for cart
-  const wishlistItems = useSelector((state) => state.wishlist?.items || []); // Safe access for wishlist
+  // Use context to get cart and wishlist data
+  const { cart, wishlist } = useContext(DataContext);
 
-  const totalCartItems = cartItems.reduce((total, item) => total + item.quantity, 0); // Calculate total items in cart
-  const totalWishlistItems = wishlistItems.length; // Calculate total items in wishlist
+  // Calculate total items in cart and wishlist
+  const totalCartItems = cart.reduce((total, item) => total + item.quantity, 0);
+  const totalWishlistItems = wishlist.length;
 
   return (
     <div className="bg-purple-600 h-16 flex items-center justify-between px-4 text-white relative">
@@ -60,12 +60,12 @@ const TopBar = () => {
           Login
         </Link>
 
-        {/* Wishlist Icon linked to ShopWishList */}
+        {/* Wishlist Icon */}
         <Link to="/shop-wishlist">
           <div className="relative">
-            <FaHeart className="text-sm cursor-pointer" title="Wishlist" />
+            <FaHeart className="text-2xl cursor-pointer" title="Wishlist" />
             {totalWishlistItems > 0 && (
-              <span className="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+              <span className="absolute top-0 left-4 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                 {totalWishlistItems}
               </span>
             )}
@@ -75,9 +75,9 @@ const TopBar = () => {
         {/* Shopping Cart Icon */}
         <Link to="/cart">
           <div className="relative">
-            <FaShoppingCart className="text-sm cursor-pointer" title="Shopping Cart" />
+            <FaShoppingCart className="text-2xl cursor-pointer" title="Shopping Cart" />
             {totalCartItems > 0 && (
-              <span className="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+              <span className="absolute top-0 left-4 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                 {totalCartItems}
               </span>
             )}
