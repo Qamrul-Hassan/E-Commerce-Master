@@ -9,7 +9,9 @@ import RecentPostImage1 from "../assets/Image/BlogS-1.png";
 import RecentPostImage2 from "../assets/Image/BlogS-2.png";
 import RecentPostImage3 from "../assets/Image/BlogS-3.png";
 import RecentPostImage4 from "../assets/Image/BlogS-4.png";
-i
+import RecentPostImage2 from "../assets/Image/BlogS-2.png";
+import RecentPostImage3 from "../assets/Image/BlogS-3.png";
+import RecentPostImage4 from "../assets/Image/BlogS-4.png";
 const BlogPage = () => {
   const { products } = useContext(DataContext); // Access products from context
   const [loading, setLoading] = useState(true); // Manage loading state for products
